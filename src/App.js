@@ -22,6 +22,16 @@ export default class App extends Component {
     });
   }
 
+  changeComment(commentChange, weekId) {
+    let week = 'week' + weekId;
+    this.setState(previousState => {
+      previousState.weeks[week].comment = commentChange
+      return previousState
+    });
+    console.log('commentChange fired');
+    console.log(this.state);
+  }
+
   render() {
     const title='React Reference Guide';
     var weeks = [];
@@ -40,7 +50,7 @@ export default class App extends Component {
         </div>
         <div className="App-layout">
           { weeks.map((week, i) =>
-            <Week key={ i } week={ week } />
+            <Week key={ i } week={ week } changeComment={this.changeComment.bind(this)}/>
           )}
         </div>
       </div>

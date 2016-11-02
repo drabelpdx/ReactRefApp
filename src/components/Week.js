@@ -1,7 +1,14 @@
 import React, { Component } from 'react';
-import Comment from './Comment';
 
 export default class Week extends Component {
+
+  handleChange(event) {
+    const commentChange = "Oh No!, I've changed!"
+    const weekId = this.props.week.id
+    this.props.changeComment(commentChange, weekId);
+    console.log('handleChange fired');
+  }
+
   render() {
     var links = [];
     var data = this.props.week.links;
@@ -21,7 +28,9 @@ export default class Week extends Component {
           )}
         </ul>
         <br />
-        <Comment comment={this.props.week.comment}/>
+        <p>Comment: { this.props.week.comment } </p>
+        <button onClick={() => this.handleChange()}
+                className='btn btn-success commentSave'>Save</button>
         <hr />
       </div>
     );

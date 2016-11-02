@@ -8,20 +8,13 @@ export default class Comment extends Component {
     };
   }
 
-  handleCommentAdd(text) {
-    this.setState({
-      comment: this.state.comment = "Oh No!, I've changed!"
-    });
-  }
   render() {
 
     return (
       <div>
-        <p>Comment: { this.state.comment } </p>
+        <p>Comment: { this.props.comment } </p>
         <div>
           <input onChange={event => this.setState({ comment: event.target.value })} />
-          <button onClick={this.handleCommentAdd.bind(this)}
-                  className='btn btn-success commentSave'>Save</button>
         </div>
       </div>
     );

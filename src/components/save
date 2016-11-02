@@ -27,4 +27,48 @@ handleWeekAdd(text) {
   }
   this.weeksRef.push(newWeek);
   this.setState({weeks: this.state.weeks.concat(newWeek)});
-} 
+}
+
+
+handleSubmit: function(e) {
+  e.preventDefault();
+  this.firebaseRefs["items"].push({
+    text: this.state.text
+  });
+  this.setState({text: ""});
+}
+
+
+
+handleCommentAdd(text) {
+  this.setState({
+    comment: "Oh No!, I've changed!"
+  });
+}
+
+
+<button onClick={this.handleCommentAdd.bind(this)}
+        className='btn btn-success commentSave'>Save</button>
+
+
+
+        let weeks = this.state.weeks;
+        let week = this.state.weeks[0];
+
+        week.comment = commentChange;
+        weeks[0] = week;
+        this.setState({weeks});
+
+
+        console.log('changeComment fired');
+        console.log(this.state);
+        console.log(week.comment);
+
+
+        this.setState({weeks: {week1: {comment: commentChange}}});
+
+
+
+        this.setState(previousState => {
+          previousState.weeks.week.comment = commentChange
+          return previousState
