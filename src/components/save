@@ -1,0 +1,30 @@
+
+
+var weeks = [];
+snap.forEach((data) => {
+  var week = {
+    id: data.val().id,
+    text: data.val().text
+  }
+  weeks.push(week);
+  this.setState({ weeks: weeks });
+});
+
+
+
+
+handleWeekAdd(text) {
+  var newWeek = {
+    id: this.state.weeks.length +1,
+    title: '',
+    links: [
+      {
+        name: name,
+        url: ''
+      }
+    ],
+    comment: ''
+  }
+  this.weeksRef.push(newWeek);
+  this.setState({weeks: this.state.weeks.concat(newWeek)});
+} 
