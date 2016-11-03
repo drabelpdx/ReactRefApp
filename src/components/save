@@ -11,6 +11,15 @@ snap.forEach((data) => {
 });
 
 
+var links = [];
+var data = this.props.week.links;
+
+for(var link in data) {
+  if(link !== null) {
+    links.push(data[link])
+  }
+}
+
 
 
 handleWeekAdd(text) {

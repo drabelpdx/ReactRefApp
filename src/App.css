@@ -16,7 +16,7 @@
 
 .App-layout {
   background-color: #66ccff;
-  height: 700px;
+  height: 1500px;
   padding: 20px;
 }
 
@@ -38,4 +38,12 @@
 .commentSave {
   margin-left: 10px;
 
+}
+
+.week {
+  height: 325px;
+  margin-top: 5px;
+  margin-bottom: 20px;
+  padding-top: 5px;
+  padding-bottom: 10px;
 }

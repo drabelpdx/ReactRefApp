@@ -1,7 +1,7 @@
 import React from 'react';
 import logo from '../logo.svg';
 
-export default function Header(props) {
+const Header = (props) => {
   return (
     <div>
       <div className="col-xs-2 col-sm-3 col-md-4">
@@ -14,5 +14,7 @@ export default function Header(props) {
         <img src={logo} className="App-logo" alt="logo" />
       </div>
     </div>
-  )
-}
+  );
+};
+
+export default Header;

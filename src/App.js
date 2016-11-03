@@ -28,8 +28,6 @@ export default class App extends Component {
       previousState.weeks[week].comment = commentChange
       return previousState
     });
-    console.log('commentChange fired');
-    console.log(this.state);
   }
 
   render() {
@@ -49,9 +47,15 @@ export default class App extends Component {
           <Header title={title} />
         </div>
         <div className="App-layout">
-          { weeks.map((week, i) =>
-            <Week key={ i } week={ week } changeComment={this.changeComment.bind(this)}/>
-          )}
+          <div className='row'>
+            { weeks.map((week, i) =>
+              <div key={ i } className="col-sm-6 col-md-6 week">
+                <Week key={ i } week={ week } changeComment={this.changeComment.bind(this)}/>
+                <hr />
+              </div>
+
+            )}
+          </div>
         </div>
       </div>
     );
