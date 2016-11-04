@@ -1,26 +1,24 @@
 import React, { Component } from 'react';
+import Form from './Form';
 
 export default class Week extends Component {
 
-  handleChange(e) {
-    const commentChange = "Oh No!, I've changed!"
-    const weekId = this.props.week.id
-    this.props.changeComment(commentChange, weekId);
-  }
-
   render() {
+    const links = Object.keys(this.props.week.links).map((key) => {
+      return (
+        <li key={ key }><a href={ this.props.week.links[key].url }
+        target="blank">{ this.props.week.links[key].name }</a></li>
+      )
+    })
+
     return (
       <div className='week'>
         <h2>{ this.props.week.title }</h2>
         <ul>
-          { this.props.week.links.map((link, i) =>
-            <li key={ i }><a href={ link.url } target="blank">{ link.name }</a></li>
-          )}
+          { links }
         </ul>
         <br />
-        <p>Comment: { this.props.week.comment } </p>
-        <button onClick={() => this.handleChange()}
-                className='btn btn-success commentSave'>Save</button>
+        <Form addLink={this.props.addLink} weekId={this.props.week.id}/>
       </div>
     );
   }

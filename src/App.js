@@ -22,20 +22,27 @@ export default class App extends Component {
     });
   }
 
-  changeComment(commentChange, weekId) {
+  addLink(newName, newUrl, weekId) {
     let week = 'week' + weekId;
-    this.setState(previousState => {
-      previousState.weeks[week].comment = commentChange
-      return previousState
-    });
+    const rootRef = firebase.database().ref();
+    const weeksRef = rootRef.child('weeks');
+    const weekRef = weeksRef.child(week);
+    const linksRef = weekRef.child('links');
+
+    var newlink = {
+      name: newName,
+      url: newUrl
+    }
+
+    linksRef.push(newlink);
   }
 
   render() {
     const title='React Reference Guide';
-    var weeks = [];
-    var data = this.state.weeks;
+    const data = this.state.weeks;
+    let weeks = [];
 
-    for(var week in data) {
+    for(let week in data) {
       if(week !== null) {
         weeks.push(data[week])
       }
@@ -50,10 +57,11 @@ export default class App extends Component {
           <div className='row'>
             { weeks.map((week, i) =>
               <div key={ i } className="col-sm-6 col-md-6 week">
-                <Week key={ i } week={ week } changeComment={this.changeComment.bind(this)}/>
+                <Week key={ i } week={ week }
+                      addLink={this.addLink.bind(this)}
+                />
                 <hr />
               </div>
-
             )}
           </div>
         </div>
