@@ -1,5 +1,23 @@
 
 
+const data = this.state.weeks;
+let weeks = [];
+
+for(let week in data) {
+  if(week !== null) {
+    weeks.push(data[week])
+  }
+}
+console.log(data)
+console.log(weeks)
+
+for(let key in data) {
+  if(key !==null) {
+    console.log(key)
+  }
+}
+
+
 var weeks = [];
 snap.forEach((data) => {
   var week = {

@@ -3,6 +3,7 @@ import './App.css';
 import * as firebase from 'firebase';
 import Header from './components/Header';
 import Week from './components/Week';
+import Form from './components/Form';
 
 export default class App extends Component {
   constructor() {
@@ -23,30 +24,39 @@ export default class App extends Component {
   }
 
   addLink(newName, newUrl, weekId) {
-    let week = 'week' + weekId;
     const rootRef = firebase.database().ref();
     const weeksRef = rootRef.child('weeks');
-    const weekRef = weeksRef.child(week);
+    const weekRef = weeksRef.child(weekId);
     const linksRef = weekRef.child('links');
 
     var newlink = {
       name: newName,
       url: newUrl
     }
-
     linksRef.push(newlink);
+  }
+
+  addWeek(newTitle) {
+    const rootRef = firebase.database().ref();
+    const weeksRef = rootRef.child('weeks');
+
+    var newWeek = {
+      title: newTitle
+    }
+    weeksRef.push(newWeek);
   }
 
   render() {
     const title='React Reference Guide';
-    const data = this.state.weeks;
-    let weeks = [];
-
-    for(let week in data) {
-      if(week !== null) {
-        weeks.push(data[week])
-      }
-    }
+    let weeks = Object.keys(this.state.weeks).map((key) => {
+      return (
+        <div key={ key } className="col-sm-6 col-md-6 week">
+          <Week key={ key } weekId={ key } week={ this.state.weeks[key] }
+                addLink={this.addLink.bind(this)} />
+          <hr />
+        </div>
+      );
+    })
 
     return (
       <div className="App">
@@ -55,15 +65,10 @@ export default class App extends Component {
         </div>
         <div className="App-layout">
           <div className='row'>
-            { weeks.map((week, i) =>
-              <div key={ i } className="col-sm-6 col-md-6 week">
-                <Week key={ i } week={ week }
-                      addLink={this.addLink.bind(this)}
-                />
-                <hr />
-              </div>
-            )}
+            { weeks }
           </div>
+          <br /><br />
+          <Form addWeek={this.addWeek.bind(this)}/>
         </div>
       </div>
     );

@@ -3,12 +3,9 @@ import React, { Component } from 'react';
 export default class Form extends Component {
   handleChange(e) {
     e.preventDefault();
-    const newName = this.refs.name.value;
-    const newUrl = this.refs.url.value;
-    const weekId = this.props.weekId
-    this.props.addLink(newName, newUrl, weekId);
-    this.refs.name.value = "";
-    this.refs.url.value = "";
+    const newTitle = this.refs.title.value;
+    this.props.addWeek(newTitle);
+    this.refs.title.value = "";
   }
 
   render() {
@@ -16,9 +13,9 @@ export default class Form extends Component {
     return (
       <div>
         <form onSubmit={this.handleChange.bind(this)} >
-          <input type="text" placeholder="link name" ref="name"/><br />
-          <input type="text" placeholder="link url" ref="url"/>
-          <button className="btn btn-success" type="submit">Add Link</button>
+          <input type="text" placeholder="title" ref="title"/><br />
+          <button className="btn btn-success linkSave" type="submit"
+                  onClick={this.handleChange.bind(this)}>Add Week</button>
         </form>
       </div>
     );
