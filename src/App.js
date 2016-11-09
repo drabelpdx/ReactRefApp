@@ -51,9 +51,9 @@ export default class App extends Component {
     let weeks = Object.keys(this.state.weeks).map((key) => {
       return (
         <div key={ key } className="col-sm-6 col-md-6 week">
-          <Week key={ key } weekId={ key } week={ this.state.weeks[key] }
+          <Week weekId={ key } week={ this.state.weeks[key] }
                 addLink={this.addLink.bind(this)} />
-          <hr />
+                <hr />
         </div>
       );
     })

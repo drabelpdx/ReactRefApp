@@ -1,5 +1,27 @@
 
 
+
+import React from 'react';
+
+const Form = (props) =>
+  <div className="Form-layout row">
+    <div className="col-sm-6 col-md-6 Form-input">
+      <input type="text" placeholder="title" /><br />
+    </div>
+    <div className="col-sm-6 col-md-6 Form-button">
+      <button className="btn btn-success" type="submit"
+              onClick={(event) => {
+                console.log(event.target);
+                event.preventDefault();
+                props.addWeek(event.target.value);
+              }}>Add Week</button>
+    </div>
+  </div>
+
+export default Form;
+
+
+
 const data = this.state.weeks;
 let weeks = [];
 

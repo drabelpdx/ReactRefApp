@@ -40,19 +40,21 @@ export default class Week extends Component {
   }
 
     return (
-      <div className='week'>
+      <div className='Week-layout'>
         <h2>{ this.props.week.title }</h2>
         <ul>
           { links }
         </ul>
         <br />
-        <div>
-          <input type="text" placeholder="link name" value={this.state.name}
-                  onChange={this.updateName.bind(this)}/><br />
-          <input type="text" placeholder="link url" value={this.state.url}
-                  onChange={this.updateUrl.bind(this)}/><br />
-          <button className="btn btn-success linkSave" type="submit"
-                  onClick={this.handleChange.bind(this)}>Add Link</button>
+        <div className="LinkForm-layout">
+          <form onSubmit={this.handleChange.bind(this)} >
+            <input type="text" placeholder="link name" value={this.state.name}
+                   onChange={this.updateName.bind(this)}/><br />
+            <input type="text" placeholder="link url" value={this.state.url}
+                   onChange={this.updateUrl.bind(this)}/><br />
+            <button className="btn btn-success linkSave"
+                    type="submit">Add Link</button>
+          </form>
         </div>
       </div>
     );

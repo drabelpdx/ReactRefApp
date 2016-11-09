@@ -16,7 +16,7 @@
 
 .App-layout {
   background-color: #66ccff;
-  height: 1500px;
+  height: auto;
   padding: 20px;
 }
 
@@ -35,13 +35,41 @@
   to { transform: rotate(360deg); }
 }
 
+.Form-layout {
+  background-color: #a3e0ff;
+  border-radius: 5px;
+  margin: auto;
+  height: 60px;
+  width: 375px;
+  padding: 2%;
+}
+
+.Form-button {
+  margin-top: -5px;
+}
+
+.Form-input {
+}
+
+.LinkForm-layout {
+  background-color: #a3e0ff;
+  border-radius: 5px;
+  position: absolute;
+  bottom: 30px;
+  left: 25%;
+  right: 25%;
+  padding: 10px;
+  width: 300px;
+
+}
+
 .linkSave {
   margin-top: 10px;
 
 }
 
-.week {
-  height: 325px;
+.Week-layout {
+  height: 350px;
   margin-top: 5px;
   margin-bottom: 20px;
   padding-top: 5px;
