@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import './Week.css';
 
 export default class Week extends Component {
   constructor() {

@@ -1,0 +1,12 @@
+.Form-layout {
+  background-color: #a3e0ff;
+  border-radius: 10px;
+  margin: auto;
+  height: 60px;
+  width: 375px;
+  padding: 2%;
+}
+
+.Form-layout button {
+  margin-top: -5px;
+}
