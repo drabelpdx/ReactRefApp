@@ -67,7 +67,7 @@ export default class App extends Component {
           <div className='row'>
             { weeks }
           </div>
-          <br /><br />
+          <br />
           <Form addWeek={this.addWeek.bind(this)}/>
         </div>
       </div>

@@ -28,7 +28,7 @@ export default class Form extends Component {
                  onChange={this.updateTitle.bind(this)}/><br />
         </div>
         <div className="col-sm-6 col-md-6">
-          <button className="btn btn-success" type="submit"
+          <button className="btn btn-primary" type="submit"
                   onClick={this.handleChange.bind(this)}>Add Week</button>
         </div>
       </div>

@@ -30,14 +30,14 @@ export default class Week extends Component {
   render() {
     let links = [];
     if(this.props.week.links !== undefined) {
-    links = Object.keys(this.props.week.links).map((key) => {
-      return (
-        <li key={ key }><a href={ this.props.week.links[key].url }
+      links = Object.keys(this.props.week.links).map((key) => {
+        return (
+          <li key={ key }><a href={ this.props.week.links[key].url }
             target="blank">{ this.props.week.links[key].name }</a>
-        </li>
-      )
-    })
-  }
+          </li>
+        )
+      })
+    }
 
     return (
       <div className='Week-layout'>
@@ -52,7 +52,7 @@ export default class Week extends Component {
                    onChange={this.updateName.bind(this)}/><br />
             <input type="text" placeholder="link url" value={this.state.url}
                    onChange={this.updateUrl.bind(this)}/><br />
-            <button className="btn btn-success linkSave"
+            <button className="btn btn-info linkSave"
                     type="submit">Add Link</button>
           </form>
         </div>
