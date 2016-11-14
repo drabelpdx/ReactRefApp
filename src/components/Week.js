@@ -6,7 +6,9 @@ export default class Week extends Component {
     super();
     this.state = {
       name: '',
-      url: ''
+      url: '',
+      addLinkForm: false,
+      addLinkButton: true
     };
   }
 
@@ -18,6 +20,7 @@ export default class Week extends Component {
     this.props.addLink(newName, newUrl, weekId);
     this.setState({name: ''});
     this.setState({url: ''});
+    this.onChangeLinkForm();
   }
 
   updateName(e) {
@@ -26,6 +29,13 @@ export default class Week extends Component {
 
   updateUrl(e) {
     this.setState({url: e.target.value})
+  }
+
+  onChangeLinkForm() {
+    this.setState({
+      addLinkForm: !this.state.addLinkForm,
+      addLinkButton: !this.state.addLinkButton
+    });
   }
 
   render() {
@@ -47,16 +57,22 @@ export default class Week extends Component {
           { links }
         </ul>
         <br />
-        <div className="LinkForm-layout">
-          <form onSubmit={this.handleChange.bind(this)} >
-            <input type="text" placeholder="link name" value={this.state.name}
+        {this.state.addLinkForm ?
+          <div className="LinkForm-layout" id="addLinkForm">
+            <form onSubmit={this.handleChange.bind(this)} >
+              <input type="text" placeholder="link name" value={this.state.name}
                    onChange={this.updateName.bind(this)}/><br />
-            <input type="text" placeholder="link url" value={this.state.url}
+              <input type="text" placeholder="link url" value={this.state.url}
                    onChange={this.updateUrl.bind(this)}/><br />
-            <button className="btn btn-info linkSave"
-                    type="submit">Add Link</button>
-          </form>
-        </div>
+              <button className="btn btn-info linkSave"
+                      type="submit">Add Link</button>
+            </form>
+          </div>
+        : null}
+          {this.state.addLinkButton ?
+          <button className="btn btn-info linkSave" id="addLinkButton"
+                  onClick={this.onChangeLinkForm.bind(this)}>Add Link</button>
+            : null}
       </div>
     );
   }

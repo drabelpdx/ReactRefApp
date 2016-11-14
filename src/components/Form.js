@@ -14,6 +14,7 @@ export default class Form extends Component {
     const newTitle = this.state.title;
     this.props.addWeek(newTitle);
     this.setState({title: ''});
+    this.props.onChangeFormMounted();
   }
 
   updateTitle(e) {

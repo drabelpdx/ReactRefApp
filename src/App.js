@@ -9,7 +9,9 @@ export default class App extends Component {
   constructor() {
     super();
     this.state = {
-      weeks: { }
+      weeks: { },
+      formMounted: false,
+      addWeekButton: true
     };
   }
 
@@ -46,6 +48,13 @@ export default class App extends Component {
     weeksRef.push(newWeek);
   }
 
+  onChangeFormMounted() {
+    this.setState({
+      formMounted: !this.state.formMounted,
+      addWeekButton: !this.state.addWeekButton
+    });
+  }
+
   render() {
     const title='React Reference Guide';
     let weeks = Object.keys(this.state.weeks).map((key) => {
@@ -68,7 +77,13 @@ export default class App extends Component {
             { weeks }
           </div>
           <br />
-          <Form addWeek={this.addWeek.bind(this)}/>
+          {this.state.formMounted ? <Form
+            addWeek={this.addWeek.bind(this)}
+            onChangeFormMounted={this.onChangeFormMounted.bind(this)}/> : null}
+          {this.state.addWeekButton ? <button
+              onClick={this.onChangeFormMounted.bind(this)}
+              className="btn btn-primary"
+              id="addWeekButton">Add Week</button> : null}
         </div>
       </div>
     );
