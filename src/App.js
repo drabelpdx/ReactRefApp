@@ -81,9 +81,9 @@ export default class App extends Component {
             addWeek={this.addWeek.bind(this)}
             onChangeFormMounted={this.onChangeFormMounted.bind(this)}/> : null}
           {this.state.addWeekButton ? <button
-              onClick={this.onChangeFormMounted.bind(this)}
-              className="btn btn-primary"
-              id="addWeekButton">Add Week</button> : null}
+            onClick={this.onChangeFormMounted.bind(this)}
+            className="btn btn-primary"
+            id="addWeekButton">Add Week</button> : null}
         </div>
       </div>
     );

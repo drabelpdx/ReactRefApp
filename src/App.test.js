@@ -1,6 +1,9 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
+import {shallow} from 'enzyme';
 import App from './App';
+import Header from './components/Header';
+import Week from './components/Week';
 import * as firebase from 'firebase';
 
 var config = {
@@ -12,13 +15,32 @@ var config = {
 };
 firebase.initializeApp(config);
 
-it('renders without crashing', () => {
-  const div = document.createElement('div');
-  ReactDOM.render(<App />, div);
+describe('App', () => {
+  it('renders without crashing', () => {
+    const div = document.createElement('div');
+    ReactDOM.render(<App />, div);
+  });
 });
 
-test('Header to read React Reference Guide', () => {
-  const Header = require('./components/Header');
-  Header.title = 'React Reference Guide';
-  expect(Header.title).toBe('React Reference Guide');
+describe('Header', () => {
+  it('check header text', () => {
+    const title = 'React Reference Guide';
+    const header = shallow (
+      <Header title={title} />
+    );
+    expect(header.text()).toEqual('React Reference Guide');
+  });
+});
+
+describe('Week', () => {
+  it('check week text', () => {
+    const week1 = {
+      title: 'Week 1',
+      links: {id: {name: " test ", url: "url.com"}}
+    };
+    const week = shallow (
+      <Week week={week1} />
+    );
+    expect(week.text()).toEqual('Week 1 test Add Link');
+  });
 });

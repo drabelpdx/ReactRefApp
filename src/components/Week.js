@@ -10,6 +10,7 @@ export default class Week extends Component {
       addLinkForm: false,
       addLinkButton: true
     };
+    // console.log("Construtor");
   }
 
   handleChange(e) {
@@ -59,6 +60,7 @@ export default class Week extends Component {
         <br />
         {this.state.addLinkForm ?
           <div className="LinkForm-layout" id="addLinkForm">
+            <p onClick={this.onChangeLinkForm.bind(this)}className="glyphicon glyphicon-remove-circle"></p>
             <form onSubmit={this.handleChange.bind(this)} >
               <input type="text" placeholder="link name" value={this.state.name}
                    onChange={this.updateName.bind(this)}/><br />
@@ -76,4 +78,35 @@ export default class Week extends Component {
       </div>
     );
   }
+
+  /*
+    componentWillMount() {
+      console.log("Component will mount");
+    }
+
+    componentDidMount() {
+      console.log("Component did mount");
+    }
+
+    componentWillReceiveProps(nextProps) {
+      console.log("Component will receive props", nextProps);
+    }
+
+    shouldComponentUpdate(nextProps, nextState) {
+      console.log("Should component update", nextProps, nextState);
+      return true;
+    }
+
+    componentWillUpdate(nextProps, nextState) {
+      console.log("Component will update", nextProps, nextState);
+    }
+
+    componentDidUpdate(prevProps, prevState) {
+      console.log("Component did update", prevProps, prevState);
+    }
+
+    componentWillUnmount() {
+      console.log("Component will unmount");
+    }
+  */
 }

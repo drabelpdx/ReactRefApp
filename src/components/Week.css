@@ -13,6 +13,21 @@
   margin-top: 10px;
 }
 
+.glyphicon-remove-circle {
+  font-size: 150%;
+  color: gray;
+  position: absolute;
+  right: 5px;
+  top: 5px;
+  cursor: pointer;
+}
+
+.formX {
+  position: absolute;
+  right: -20px;
+  top: -20px;
+}
+
 .Week-layout {
   height: 350px;
   padding-top: 5px;
