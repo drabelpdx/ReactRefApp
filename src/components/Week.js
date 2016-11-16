@@ -7,8 +7,11 @@ export default class Week extends Component {
     this.state = {
       name: '',
       url: '',
+      key: '',
       addLinkForm: false,
-      addLinkButton: true
+      addLinkButton: true,
+      updateLinkForm: false,
+
     };
     // console.log("Construtor");
   }
@@ -39,13 +42,58 @@ export default class Week extends Component {
     });
   }
 
+  onChangeUpdateLinkForm(key) {
+    this.setState({
+      updateLinkForm: !this.state.updateLinkForm,
+      addLinkButton: !this.state.addLinkButton,
+      name: this.props.week.links[key].name,
+      url: this.props.week.links[key].url,
+      key: key
+    });
+  }
+
+  onCloseUpdateLinkForm() {
+    this.setState({
+      updateLinkForm: !this.state.updateLinkForm,
+      addLinkButton: !this.state.addLinkButton,
+      name: '',
+      url: '',
+      key: ''
+    });
+  }
+
+  handleRemoveLink(key) {
+    const weekId = this.props.weekId
+    this.props.removeLink(weekId, key);
+  }
+
+  handleEditLink(e) {
+    e.preventDefault();
+    const key = this.state.key
+    console.log(key)
+
+    const weekId = this.props.weekId
+    const editName = this.state.name
+    const editUrl = this.state.url
+    this.props.editLink(weekId, key, editName, editUrl);
+    this.setState({
+      name: '',
+      url: '',
+      key: '',
+      updateLinkForm: !this.state.updateLinkForm,
+      addLinkButton: !this.state.addLinkButton,
+    });
+  }
+
   render() {
     let links = [];
     if(this.props.week.links !== undefined) {
       links = Object.keys(this.props.week.links).map((key) => {
         return (
-          <li key={ key }><a href={ this.props.week.links[key].url }
-            target="blank">{ this.props.week.links[key].name }</a>
+          <li key={ key }>
+            <span onClick={this.onChangeUpdateLinkForm.bind(this, key)}className="glyphicon glyphicon-pencil"></span>
+            <span onClick={this.handleRemoveLink.bind(this, key)}className="glyphicon glyphicon-remove"></span>
+            <a href={ this.props.week.links[key].url } target="blank">{ this.props.week.links[key].name }</a>
           </li>
         )
       })
@@ -63,14 +111,28 @@ export default class Week extends Component {
             <p onClick={this.onChangeLinkForm.bind(this)}className="glyphicon glyphicon-remove-circle"></p>
             <form onSubmit={this.handleChange.bind(this)} >
               <input type="text" placeholder="link name" value={this.state.name}
-                   onChange={this.updateName.bind(this)}/><br />
+                  onChange={this.updateName.bind(this)}/><br />
               <input type="text" placeholder="link url" value={this.state.url}
-                   onChange={this.updateUrl.bind(this)}/><br />
+                  onChange={this.updateUrl.bind(this)}/><br />
               <button className="btn btn-info linkSave"
-                      type="submit">Add Link</button>
+                  type="submit">Add Link</button>
             </form>
           </div>
         : null}
+        {this.state.updateLinkForm ?
+          <div className="LinkForm-layout" id="updateLinkForm">
+            <p onClick={this.onCloseUpdateLinkForm.bind(this)}className="glyphicon glyphicon-remove-circle"></p>
+            <form onSubmit={this.handleEditLink.bind(this)} >
+              <input type="text" value={this.state.name}
+                  onChange={this.updateName.bind(this)}/><br />
+              <input type="text" value={this.state.url}
+                  onChange={this.updateUrl.bind(this)}/><br />
+              <button className="btn btn-info linkSave"
+                  type="submit">Update Link</button>
+            </form>
+          </div>
+        : null}
+
           {this.state.addLinkButton ?
           <button className="btn btn-info linkSave" id="addLinkButton"
                   onClick={this.onChangeLinkForm.bind(this)}>Add Link</button>
