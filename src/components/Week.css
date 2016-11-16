@@ -13,6 +13,10 @@
   margin-top: 10px;
 }
 
+.links:hover {
+  color: white
+}
+
 .glyphicon-remove-circle {
   font-size: 150%;
   color: gray;
@@ -37,7 +41,7 @@
   color: white;
   opacity: 0.2;
   margin-left: 10px;
-  margin-right: 10px;
+  margin-right: 15px;
   cursor: pointer;
 }
 

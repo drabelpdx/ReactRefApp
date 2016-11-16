@@ -13,7 +13,6 @@ export default class App extends Component {
       formMounted: false,
       addWeekButton: true
     };
-
   }
 
   componentDidMount() {
@@ -24,7 +23,6 @@ export default class App extends Component {
         weeks: snap.val()
       });
     });
-    // console.log("Component did mount");
   }
 
   addLink(newName, newUrl, weekId) {
@@ -112,31 +110,4 @@ export default class App extends Component {
       </div>
     );
   }
-
-/*
-    componentWillMount() {
-      // console.log("Component will mount");
-    }
-
-    componentWillReceiveProps(nextProps) {
-      console.log("Component will receive props", nextProps);
-    }
-
-    shouldComponentUpdate(nextProps, nextState) {
-      console.log("Should component update", nextProps, nextState);
-      return true;
-    }
-
-    componentWillUpdate(nextProps, nextState) {
-      console.log("Component will update", nextProps, nextState);
-    }
-
-    componentDidUpdate(prevProps, prevState) {
-      console.log("Component did update", prevProps, prevState);
-    }
-
-    componentWillUnmount() {
-      console.log("Component will unmount");
-    }
-*/
 }

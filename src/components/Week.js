@@ -91,7 +91,7 @@ export default class Week extends Component {
           <li key={ key }>
             <span onClick={this.onChangeUpdateLinkForm.bind(this, key)}className="glyphicon glyphicon-pencil"></span>
             <span onClick={this.handleRemoveLink.bind(this, key)}className="glyphicon glyphicon-remove"></span>
-            <a href={ this.props.week.links[key].url } target="blank">{ this.props.week.links[key].name }</a>
+            <a href={ this.props.week.links[key].url } target="blank" className="links">{ this.props.week.links[key].name }</a>
           </li>
         )
       })
