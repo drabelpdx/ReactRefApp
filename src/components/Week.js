@@ -70,8 +70,6 @@ export default class Week extends Component {
   handleEditLink(e) {
     e.preventDefault();
     const key = this.state.key
-    console.log(key)
-
     const weekId = this.props.weekId
     const editName = this.state.name
     const editUrl = this.state.url

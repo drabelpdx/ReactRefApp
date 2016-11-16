@@ -41,8 +41,6 @@ export default class App extends Component {
   }
 
   removeLink(weekId, key) {
-    console.log(weekId);
-    console.log(key);
     const rootRef = firebase.database().ref();
     const weeksRef = rootRef.child('weeks');
     const weekRef = weeksRef.child(weekId);
@@ -51,10 +49,6 @@ export default class App extends Component {
   }
 
   editLink(weekId, key, editName, editUrl) {
-    console.log(weekId);
-    console.log(key);
-    console.log(editName);
-    console.log(editUrl);
     const rootRef = firebase.database().ref();
     const weeksRef = rootRef.child('weeks');
     const weekRef = weeksRef.child(weekId);
