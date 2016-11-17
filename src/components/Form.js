@@ -14,11 +14,11 @@ export default class Form extends Component {
     const newTitle = this.state.title;
     this.props.addWeek(newTitle);
     this.setState({title: ''});
-    this.props.onChangeFormMounted();
+    this.props.onFormMounted();
   }
 
   closeForm(e) {
-    this.props.onChangeFormMounted();
+    this.props.onFormMounted();
   }
 
   updateTitle(e) {
@@ -37,7 +37,8 @@ export default class Form extends Component {
           <button className="btn btn-primary" type="submit"
                   onClick={this.handleChange.bind(this)}>Add Week</button>
           <div className="formX">
-            <span onClick={this.closeForm.bind(this)}className="glyphicon glyphicon-remove-circle"></span>
+            <span onClick={this.closeForm.bind(this)}
+                  className="glyphicon glyphicon-remove-circle"></span>
           </div>
         </div>
       </div>

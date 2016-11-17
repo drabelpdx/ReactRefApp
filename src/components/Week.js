@@ -117,9 +117,12 @@ export default class Week extends Component {
       links = Object.keys(this.props.week.links).map((key) => {
         return (
           <li key={ key }>
-            <span onClick={this.onChangeUpdateLinkForm.bind(this, key)}className="glyphicon glyphicon-pencil"></span>
-            <span onClick={this.handleRemoveLink.bind(this, key)}className="glyphicon glyphicon-remove"></span>
-            <a href={ this.props.week.links[key].url } target="blank" className="links">{ this.props.week.links[key].name }</a>
+            <span onClick={this.onChangeUpdateLinkForm.bind(this, key)}
+                  className="glyphicon glyphicon-pencil"></span>
+            <span onClick={this.handleRemoveLink.bind(this, key)}
+                  className="glyphicon glyphicon-remove"></span>
+            <a href={ this.props.week.links[key].url } target="blank"
+                  className="links">{ this.props.week.links[key].name }</a>
           </li>
         )
       })
@@ -129,26 +132,26 @@ export default class Week extends Component {
       <div className='Week-layout'>
         {this.state.editDeleteWeek ?
           <div className="WeekForm-layout">
-          <p onClick={this.onShowWeek.bind(this)}className="glyphicon glyphicon-remove-circle"></p>
-
+          <p onClick={this.onShowWeek.bind(this)}
+             className="glyphicon glyphicon-remove-circle"></p>
             <input type="text" value={this.state.title}
                    onChange={this.updateTitle.bind(this)}/><br />
             <button className="btn btn btn-default linkSave" id="editTitleButton"
                     onClick={this.handleEditWeek.bind(this)}>Update</button>
             <button className="btn btn btn-danger linkSave" id="deleteWeekButton"
-                    onClick={this.handleRemoveWeek.bind(this)}>Delete</button><br /><br />
+                    onClick={this.handleRemoveWeek.bind(this)}>Delete</button>
+                    <br /><br />
           </div>
         : <h2 id="weekTitle" onClick={this.onShowWeek.bind(this)}>
               { this.props.week.title }</h2>}
-
         <ul>
           { links }
         </ul>
         <br />
-
         {this.state.addLinkForm ?
           <div className="LinkForm-layout" id="addLinkForm">
-            <p onClick={this.onChangeLinkForm.bind(this)}className="glyphicon glyphicon-remove-circle"></p>
+            <p onClick={this.onChangeLinkForm.bind(this)}
+               className="glyphicon glyphicon-remove-circle"></p>
             <form onSubmit={this.handleChange.bind(this)} >
               <input type="text" placeholder="link name" value={this.state.name}
                   onChange={this.updateName.bind(this)}/><br />
@@ -159,10 +162,10 @@ export default class Week extends Component {
             </form>
           </div>
         : null}
-
         {this.state.updateLinkForm ?
           <div className="LinkForm-layout" id="updateLinkForm">
-            <p onClick={this.onCloseUpdateLinkForm.bind(this)}className="glyphicon glyphicon-remove-circle"></p>
+            <p onClick={this.onCloseUpdateLinkForm.bind(this)}
+               className="glyphicon glyphicon-remove-circle"></p>
             <form onSubmit={this.handleEditLink.bind(this)} >
               <input type="text" value={this.state.name}
                   onChange={this.updateName.bind(this)}/><br />
@@ -173,12 +176,10 @@ export default class Week extends Component {
             </form>
           </div>
         : null}
-
         {this.state.addLinkButton ?
           <button className="btn btn-info linkSave" id="addLinkButton"
                   onClick={this.onChangeLinkForm.bind(this)}>Add Link</button>
         : null}
-
       </div>
     );
   }

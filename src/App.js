@@ -11,14 +11,13 @@ export default class App extends Component {
     this.state = {
       weeks: { },
       formMounted: false,
-      addWeekButton: true
+      addWeekButton: true,
+      database: firebase.database().ref().child('weeks')
     };
   }
 
   componentDidMount() {
-    const rootRef = firebase.database().ref();
-    const weeksRef = rootRef.child('weeks');
-    weeksRef.on('value', snap => {
+    this.state.database.on('value', snap => {
       this.setState({
         weeks: snap.val()
       });
@@ -26,63 +25,42 @@ export default class App extends Component {
   }
 
   addLink(newName, newUrl, weekId) {
-    const rootRef = firebase.database().ref();
-    const weeksRef = rootRef.child('weeks');
-    const weekRef = weeksRef.child(weekId);
-    const linksRef = weekRef.child('links');
-
     var newlink = {
       name: newName,
       url: newUrl
     }
-    linksRef.push(newlink);
+    this.state.database.child(weekId).child('links').push(newlink);
   }
 
   removeLink(weekId, key) {
-    const rootRef = firebase.database().ref();
-    const weeksRef = rootRef.child('weeks');
-    const weekRef = weeksRef.child(weekId);
-    const linksRef = weekRef.child('links');
-    linksRef.child(key).remove();
+    this.state.database.child(weekId).child('links').child(key).remove();
   }
 
   editLink(weekId, key, editName, editUrl) {
-    const rootRef = firebase.database().ref();
-    const weeksRef = rootRef.child('weeks');
-    const weekRef = weeksRef.child(weekId);
-    const linksRef = weekRef.child('links');
-    const linkRef = linksRef.child(key);
+    const linkRef = this.state.database.child(weekId).child('links').child(key);
     linkRef.child('name').set(editName);
     linkRef.child('url').set(editUrl);
   }
 
   addWeek(newTitle) {
-    const rootRef = firebase.database().ref();
-    const weeksRef = rootRef.child('weeks');
-
     var newWeek = {
       title: newTitle
     }
-    weeksRef.push(newWeek);
+    this.state.database.push(newWeek);
   }
 
   removeWeek(weekId) {
-    const rootRef = firebase.database().ref();
-    const weeksRef = rootRef.child('weeks');
     var response = prompt("Are you sure you want to delete the whole week? (Y/N)");
     if (response.toUpperCase() === 'Y') {
-      weeksRef.child(weekId).remove();
+      this.state.database.child(weekId).remove();
     }
   }
 
   editWeek(weekId, editTitle) {
-    const rootRef = firebase.database().ref();
-    const weeksRef = rootRef.child('weeks');
-    const weekRef = weeksRef.child(weekId);
-    weekRef.child('title').set(editTitle);
+    this.state.database.child(weekId).child('title').set(editTitle);
   }
 
-  onChangeFormMounted() {
+  onFormMounted() {
     this.setState({
       formMounted: !this.state.formMounted,
       addWeekButton: !this.state.addWeekButton
@@ -117,9 +95,9 @@ export default class App extends Component {
           <br />
           {this.state.formMounted ? <Form
             addWeek={this.addWeek.bind(this)}
-            onChangeFormMounted={this.onChangeFormMounted.bind(this)}/> : null}
+            onFormMounted={this.onFormMounted.bind(this)}/> : null}
           {this.state.addWeekButton ? <button
-            onClick={this.onChangeFormMounted.bind(this)}
+            onClick={this.onFormMounted.bind(this)}
             className="btn btn-primary"
             id="addWeekButton">Add Week</button> : null}
         </div>
