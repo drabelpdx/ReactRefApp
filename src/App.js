@@ -52,10 +52,8 @@ export default class App extends Component {
     const weekRef = weeksRef.child(weekId);
     const linksRef = weekRef.child('links');
     const linkRef = linksRef.child(key);
-
     linkRef.child('name').set(editName);
     linkRef.child('url').set(editUrl);
-
   }
 
   addWeek(newTitle) {
@@ -66,6 +64,22 @@ export default class App extends Component {
       title: newTitle
     }
     weeksRef.push(newWeek);
+  }
+
+  removeWeek(weekId) {
+    const rootRef = firebase.database().ref();
+    const weeksRef = rootRef.child('weeks');
+    var response = prompt("Are you sure you want to delete the whole week? (Y/N)");
+    if (response.toUpperCase() === 'Y') {
+      weeksRef.child(weekId).remove();
+    }
+  }
+
+  editWeek(weekId, editTitle) {
+    const rootRef = firebase.database().ref();
+    const weeksRef = rootRef.child('weeks');
+    const weekRef = weeksRef.child(weekId);
+    weekRef.child('title').set(editTitle);
   }
 
   onChangeFormMounted() {
@@ -83,7 +97,9 @@ export default class App extends Component {
           <Week weekId={ key } week={ this.state.weeks[key] }
                 addLink={ this.addLink.bind(this) }
                 editLink={ this.editLink.bind(this) }
-                removeLink={ this.removeLink.bind(this) } />
+                removeLink={ this.removeLink.bind(this) }
+                editWeek={ this.editWeek.bind(this) }
+                removeWeek={ this.removeWeek.bind(this) } />
                 <hr />
         </div>
       );

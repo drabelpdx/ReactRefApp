@@ -8,10 +8,11 @@ export default class Week extends Component {
       name: '',
       url: '',
       key: '',
+      title: '',
       addLinkForm: false,
       addLinkButton: true,
       updateLinkForm: false,
-
+      editDeleteWeek: false
     };
     // console.log("Construtor");
   }
@@ -35,10 +36,21 @@ export default class Week extends Component {
     this.setState({url: e.target.value})
   }
 
+  updateTitle(e) {
+    this.setState({title: e.target.value})
+  }
+
   onChangeLinkForm() {
     this.setState({
       addLinkForm: !this.state.addLinkForm,
       addLinkButton: !this.state.addLinkButton
+    });
+  }
+
+  onShowWeek() {
+    this.setState({
+      editDeleteWeek: !this.state.editDeleteWeek,
+      title: this.props.week.title
     });
   }
 
@@ -83,6 +95,22 @@ export default class Week extends Component {
     });
   }
 
+  handleRemoveWeek() {
+    const weekId = this.props.weekId
+    this.props.removeWeek(weekId);
+  }
+
+  handleEditWeek(e) {
+    e.preventDefault();
+    const weekId = this.props.weekId
+    const editTitle = this.state.title
+    this.props.editWeek(weekId, editTitle);
+    this.setState({
+      title: '',
+      editDeleteWeek: !this.state.editDeleteWeek
+    });
+  }
+
   render() {
     let links = [];
     if(this.props.week.links !== undefined) {
@@ -99,11 +127,25 @@ export default class Week extends Component {
 
     return (
       <div className='Week-layout'>
-        <h2>{ this.props.week.title }</h2>
+        {this.state.editDeleteWeek ?
+          <div className="WeekForm-layout">
+          <p onClick={this.onShowWeek.bind(this)}className="glyphicon glyphicon-remove-circle"></p>
+
+            <input type="text" value={this.state.title}
+                   onChange={this.updateTitle.bind(this)}/><br />
+            <button className="btn btn btn-default linkSave" id="editTitleButton"
+                    onClick={this.handleEditWeek.bind(this)}>Update</button>
+            <button className="btn btn btn-danger linkSave" id="deleteWeekButton"
+                    onClick={this.handleRemoveWeek.bind(this)}>Delete</button><br /><br />
+          </div>
+        : <h2 id="weekTitle" onClick={this.onShowWeek.bind(this)}>
+              { this.props.week.title }</h2>}
+
         <ul>
           { links }
         </ul>
         <br />
+
         {this.state.addLinkForm ?
           <div className="LinkForm-layout" id="addLinkForm">
             <p onClick={this.onChangeLinkForm.bind(this)}className="glyphicon glyphicon-remove-circle"></p>
@@ -117,6 +159,7 @@ export default class Week extends Component {
             </form>
           </div>
         : null}
+
         {this.state.updateLinkForm ?
           <div className="LinkForm-layout" id="updateLinkForm">
             <p onClick={this.onCloseUpdateLinkForm.bind(this)}className="glyphicon glyphicon-remove-circle"></p>
@@ -131,10 +174,11 @@ export default class Week extends Component {
           </div>
         : null}
 
-          {this.state.addLinkButton ?
+        {this.state.addLinkButton ?
           <button className="btn btn-info linkSave" id="addLinkButton"
                   onClick={this.onChangeLinkForm.bind(this)}>Add Link</button>
-            : null}
+        : null}
+
       </div>
     );
   }
