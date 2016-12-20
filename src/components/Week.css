@@ -75,3 +75,21 @@
 #weekTitle:hover {
   cursor: pointer;
 }
+
+.fade-enter {
+  transform: rotateX(90deg) rotateZ(90deg);
+}
+
+.fade-enter-active {
+  transform: rotateX(0deg) rotateZ(0deg);
+  transition: .5s ease-in all;
+}
+
+fade-leave {
+  opacity: 1.0;
+}
+
+.fade-leave-active {
+  opacity: 0;
+  transition: 1s ease-out all;
+}

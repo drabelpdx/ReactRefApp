@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import './Week.css';
+import ReactCSSTransitionGroup from 'react-addons-css-transition-group';
 
 export default class Week extends Component {
   constructor() {
@@ -145,7 +146,12 @@ export default class Week extends Component {
         : <h2 id="weekTitle" onClick={this.onShowWeek.bind(this)}>
               { this.props.week.title }</h2>}
         <ul>
-          { links }
+          <ReactCSSTransitionGroup
+            transitionName="fade"
+            transitionEnterTimeout={500}
+            transitionLeaveTimeout={300}>
+            { links }
+          </ReactCSSTransitionGroup>
         </ul>
         <br />
         {this.state.addLinkForm ?
